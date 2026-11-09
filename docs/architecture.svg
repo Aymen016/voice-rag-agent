@@ -1,0 +1,294 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1060" width="1600" height="1060" font-family="Inter, Segoe UI, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F766E"/></marker>
+    <marker id="purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker>
+    <marker id="gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748B"/></marker>
+    <style>
+      .title { font-size: 26px; font-weight: 700; fill: #0F172A; }
+      .subtitle { font-size: 14px; fill: #475569; }
+      .panel-label { font-size: 13px; font-weight: 700; letter-spacing: 1.5px; fill: #475569; }
+      .h { font-size: 15px; font-weight: 700; fill: #0F172A; }
+      .t { font-size: 12.5px; fill: #334155; }
+      .s { font-size: 11.5px; fill: #64748B; }
+      .mono { font-family: "JetBrains Mono", Consolas, ui-monospace, monospace; font-size: 12px; fill: #0F172A; }
+      .guard { font-size: 12px; fill: #92400E; }
+      .label { font-size: 12px; font-weight: 600; fill: #0F766E; }
+      .plabel { font-size: 12px; font-weight: 600; fill: #6D28D9; }
+      .num { font-size: 12px; font-weight: 700; fill: #FFFFFF; }
+      .panel { fill: #F8FAFC; stroke: #E2E8F0; stroke-width: 1.5; }
+      .box { fill: #FFFFFF; stroke: #CBD5E1; stroke-width: 1.2; }
+      .stage { fill: #F0FDFA; stroke: #0F766E; stroke-width: 1.5; }
+      .llm { fill: #F5F3FF; stroke: #6D28D9; stroke-width: 1.5; }
+      .data { fill: #F1F5F9; stroke: #64748B; stroke-width: 1.2; }
+      .guardbox { fill: #FFFBEB; stroke: #F59E0B; stroke-width: 1; }
+      .chip { fill: #FFFFFF; stroke: #0F766E; stroke-width: 1; }
+      .pill { fill: #FFFFFF; stroke: #CBD5E1; stroke-width: 1; }
+      .flow { fill: none; stroke: #0F766E; stroke-width: 2; }
+      .llmflow { fill: none; stroke: #6D28D9; stroke-width: 1.6; stroke-dasharray: 6 4; }
+      .dataflow { fill: none; stroke: #64748B; stroke-width: 1.6; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1060" fill="#FFFFFF"/>
+
+  <!-- Title -->
+  <text x="30" y="42" class="title">Nova: voice-to-voice support agent with RAG, semantic search and tool calling</text>
+  <text x="30" y="66" class="subtitle">One turn: speak → transcribe → analyze → tools (multi-step) → verify grounding → answer with sources → speak</text>
+
+  <!-- ===================== Panels ===================== -->
+  <rect x="30" y="90" width="350" height="830" rx="14" class="panel"/>
+  <text x="50" y="115" class="panel-label">BROWSER · NEXT.JS + REACT</text>
+
+  <rect x="430" y="90" width="800" height="830" rx="14" class="panel"/>
+  <text x="450" y="115" class="panel-label">SERVER · NESTJS API · :4000</text>
+
+  <rect x="1275" y="90" width="295" height="830" rx="14" class="panel"/>
+  <text x="1295" y="115" class="panel-label">EXTERNAL &amp; CONFIG</text>
+
+  <!-- ===================== Browser ===================== -->
+  <rect x="50" y="130" width="310" height="44" rx="10" class="box"/>
+  <circle cx="70" cy="152" r="10" fill="#0F766E"/><text x="70" y="156" text-anchor="middle" class="num">1</text>
+  <text x="88" y="157" class="h">Microphone</text>
+  <text x="190" y="157" class="s">user speaks (no typing)</text>
+
+  <rect x="50" y="200" width="310" height="70" rx="10" class="box"/>
+  <circle cx="70" cy="222" r="10" fill="#0F766E"/><text x="70" y="226" text-anchor="middle" class="num">2</text>
+  <text x="88" y="227" class="h">Speech-to-text</text>
+  <text x="66" y="248" class="t">Web Speech API, continuous mode</text>
+  <text x="66" y="263" class="s">1.5 s silence timer · live interim transcript</text>
+
+  <rect x="50" y="296" width="310" height="110" rx="10" class="box"/>
+  <text x="66" y="320" class="h">useVoiceAgent</text>
+  <text x="180" y="320" class="s">state machine</text>
+  <rect x="66" y="334" width="66" height="24" rx="12" class="pill"/><text x="99" y="350" text-anchor="middle" class="s">idle</text>
+  <rect x="138" y="334" width="78" height="24" rx="12" fill="#FFF1F2" stroke="#FB7185"/><text x="177" y="350" text-anchor="middle" class="s">listening</text>
+  <rect x="222" y="334" width="86" height="24" rx="12" fill="#FFFBEB" stroke="#F59E0B"/><text x="265" y="350" text-anchor="middle" class="s">processing</text>
+  <rect x="66" y="364" width="84" height="24" rx="12" fill="#F0FDFA" stroke="#0F766E"/><text x="108" y="380" text-anchor="middle" class="s">speaking</text>
+  <text x="160" y="381" class="s">hands-free · barge-in</text>
+  <text x="66" y="400" class="s">session id kept in localStorage</text>
+
+  <rect x="50" y="436" width="310" height="128" rx="10" class="box"/>
+  <text x="66" y="460" class="h">Conversation UI</text>
+  <text x="66" y="482" class="t">Transcript (user + Nova)</text>
+  <text x="66" y="500" class="t">Grounding badge · source chips + scores</text>
+  <text x="66" y="518" class="t">Agent trace: intent, tools, verifier</text>
+  <text x="66" y="536" class="t">New conversation (reset)</text>
+  <text x="66" y="554" class="s">resumes an answer in progress after reload</text>
+
+  <rect x="50" y="598" width="310" height="70" rx="10" class="box"/>
+  <circle cx="70" cy="620" r="10" fill="#0F766E"/><text x="70" y="624" text-anchor="middle" class="num">8</text>
+  <text x="88" y="625" class="h">Text-to-speech</text>
+  <text x="66" y="646" class="t">speechSynthesis, sentence queue</text>
+  <text x="66" y="661" class="s">citations and markdown stripped first</text>
+
+  <rect x="50" y="702" width="310" height="44" rx="10" class="box"/>
+  <text x="66" y="729" class="h">Speaker</text>
+  <text x="140" y="729" class="s">user hears the answer</text>
+
+  <rect x="50" y="784" width="310" height="116" rx="10" class="box"/>
+  <text x="66" y="808" class="h">Inspector panels</text>
+  <text x="66" y="830" class="t">Semantic search (ranked, with scores)</text>
+  <text x="66" y="848" class="t">Knowledge base browser</text>
+  <text x="66" y="866" class="t">Demo script (8 scenarios)</text>
+  <text x="66" y="886" class="mono">GET /api/kb/search</text>
+
+  <!-- Browser internal arrows -->
+  <path d="M205 174 V198" class="flow" marker-end="url(#teal)"/>
+  <path d="M205 270 V294" class="flow" marker-end="url(#teal)"/>
+  <path d="M205 406 V434" class="flow" marker-end="url(#teal)"/>
+  <path d="M205 564 V596" class="flow" marker-end="url(#teal)"/>
+  <path d="M205 668 V700" class="flow" marker-end="url(#teal)"/>
+
+  <!-- ===================== Server: entry row ===================== -->
+  <rect x="450" y="132" width="230" height="40" rx="8" class="guardbox"/>
+  <text x="565" y="157" text-anchor="middle" class="guard">Rate limit · 20 turns/min per IP</text>
+  <rect x="695" y="132" width="230" height="40" rx="8" class="box"/>
+  <text x="810" y="157" text-anchor="middle" class="t">Per-session queue (no interleaving)</text>
+  <rect x="940" y="132" width="275" height="40" rx="8" class="box"/>
+  <text x="1077" y="157" text-anchor="middle" class="t">75 s turn budget → clear 429 / 504</text>
+  <path d="M680 152 H693" class="flow" marker-end="url(#teal)"/>
+  <path d="M925 152 H938" class="flow" marker-end="url(#teal)"/>
+
+  <!-- ===================== Server: pipeline ===================== -->
+  <rect x="450" y="196" width="180" height="140" rx="10" class="stage"/>
+  <circle cx="470" cy="218" r="10" fill="#0F766E"/><text x="470" y="222" text-anchor="middle" class="num">4</text>
+  <text x="488" y="223" class="h">Analyze</text>
+  <text x="466" y="246" class="t">Intent recognition</text>
+  <text x="466" y="264" class="t">Rewrite follow-up into</text>
+  <text x="466" y="280" class="t">a standalone query</text>
+  <text x="466" y="298" class="t">Extract email, invoice</text>
+  <text x="466" y="322" class="s">JSON mode · 1 LLM call</text>
+
+  <rect x="645" y="196" width="180" height="140" rx="10" class="stage"/>
+  <circle cx="665" cy="218" r="10" fill="#0F766E"/><text x="665" y="222" text-anchor="middle" class="num">5</text>
+  <text x="683" y="223" class="h">Agent loop</text>
+  <text x="661" y="246" class="t">LLM picks tools</text>
+  <text x="661" y="264" class="t">Server runs them</text>
+  <text x="661" y="282" class="t">Results fed back</text>
+  <text x="661" y="300" class="t">Repeat until answer</text>
+  <text x="661" y="322" class="s">function calling · ≤ 6 steps</text>
+
+  <rect x="840" y="196" width="180" height="140" rx="10" class="stage"/>
+  <circle cx="860" cy="218" r="10" fill="#0F766E"/><text x="860" y="222" text-anchor="middle" class="num">6</text>
+  <text x="878" y="223" class="h">Verify</text>
+  <text x="856" y="246" class="t">Answer vs passages</text>
+  <text x="856" y="264" class="t">and tool facts</text>
+  <text x="856" y="282" class="t">Attach sources</text>
+  <text x="856" y="300" class="t">Flag unsupported claims</text>
+  <text x="856" y="322" class="s">decides the badge</text>
+
+  <rect x="1035" y="196" width="180" height="140" rx="10" class="stage"/>
+  <circle cx="1055" cy="218" r="10" fill="#0F766E"/><text x="1055" y="222" text-anchor="middle" class="num">7</text>
+  <text x="1073" y="223" class="h">Output</text>
+  <text x="1051" y="246" class="t">Drop invalid [S#]</text>
+  <text x="1051" y="264" class="t">Speech-ready text</text>
+  <text x="1051" y="282" class="t">Trace + latency</text>
+  <text x="1051" y="300" class="t">Update memory</text>
+  <text x="1051" y="322" class="s">reply + speech + sources</text>
+
+  <path d="M630 266 H643" class="flow" marker-end="url(#teal)"/>
+  <path d="M825 266 H838" class="flow" marker-end="url(#teal)"/>
+  <path d="M1020 266 H1033" class="flow" marker-end="url(#teal)"/>
+  <path d="M520 172 V194" class="flow" marker-end="url(#teal)"/>
+
+  <!-- ===================== Server: tools + memory ===================== -->
+  <rect x="450" y="384" width="560" height="196" rx="10" class="box"/>
+  <text x="466" y="408" class="h">ToolRegistry</text>
+  <text x="572" y="408" class="s">JSON-schema tools · args validated · errors returned to the model</text>
+
+  <rect x="466" y="420" width="170" height="30" rx="7" class="chip"/><text x="551" y="440" text-anchor="middle" class="mono">get_customer_account</text>
+  <rect x="646" y="420" width="170" height="30" rx="7" class="chip"/><text x="731" y="440" text-anchor="middle" class="mono">calculate_refund</text>
+  <rect x="826" y="420" width="170" height="30" rx="7" class="chip"/><text x="911" y="440" text-anchor="middle" class="mono">search_knowledge_base</text>
+  <rect x="466" y="458" width="170" height="30" rx="7" class="chip"/><text x="551" y="478" text-anchor="middle" class="mono">check_service_status</text>
+  <rect x="646" y="458" width="170" height="30" rx="7" class="chip"/><text x="731" y="478" text-anchor="middle" class="mono">create_support_ticket</text>
+
+  <rect x="466" y="496" width="350" height="74" rx="8" class="guardbox"/>
+  <text x="480" y="514" class="guard" font-weight="600">Guards enforced in code, not the prompt</text>
+  <text x="480" y="530" class="guard">· only accounts the caller named themselves</text>
+  <text x="480" y="546" class="guard">· refunds and tickets only for the current caller</text>
+  <text x="480" y="562" class="guard">· ticket needs consent · idempotent for 10 min</text>
+  <text x="836" y="508" class="s">search returns ranked</text>
+  <text x="836" y="524" class="s">passages, scores and an</text>
+  <text x="836" y="540" class="s">assessment: sufficient /</text>
+  <text x="836" y="556" class="s">weak / none</text>
+
+  <path d="M735 336 V382" class="flow" marker-start="url(#teal)" marker-end="url(#teal)"/>
+  <text x="742" y="364" class="label">tool calls / results</text>
+
+  <rect x="1035" y="384" width="180" height="196" rx="10" class="data"/>
+  <text x="1051" y="408" class="h">SessionStore</text>
+  <text x="1051" y="430" class="t">Facts (memory):</text>
+  <text x="1051" y="448" class="s">email · name · plan</text>
+  <text x="1051" y="464" class="s">invoice · refund · ticket</text>
+  <text x="1051" y="486" class="t">Recent turns as text</text>
+  <text x="1051" y="506" class="t">Transcript for the UI</text>
+  <text x="1051" y="530" class="s">new caller clears old facts</text>
+  <text x="1051" y="548" class="s">LRU, in memory</text>
+  <path d="M1125 336 V382" class="dataflow" marker-end="url(#gray)"/>
+  <text x="1131" y="364" class="s">memory</text>
+
+  <!-- ===================== Server: data layer ===================== -->
+  <rect x="450" y="612" width="180" height="186" rx="10" class="data"/>
+  <text x="466" y="636" class="h">Mock CRM</text>
+  <text x="466" y="658" class="t">4 demo accounts</text>
+  <text x="466" y="676" class="t">Invoices (dates relative</text>
+  <text x="466" y="692" class="t">to today)</text>
+  <text x="466" y="712" class="t">Service status page</text>
+  <text x="466" y="730" class="t">Tickets</text>
+  <text x="466" y="784" class="s">stands in for internal APIs</text>
+
+  <rect x="645" y="612" width="180" height="186" rx="10" class="data"/>
+  <text x="661" y="636" class="h">Knowledge base</text>
+  <text x="661" y="658" class="t">10 markdown docs</text>
+  <text x="661" y="676" class="t">Split by ## heading</text>
+  <text x="661" y="694" class="t">→ 64 section chunks</text>
+  <text x="661" y="712" class="t">"Doc &gt; Section" prefix</text>
+  <text x="661" y="784" class="mono">knowledge-base/*.md</text>
+
+  <rect x="840" y="612" width="180" height="186" rx="10" class="data"/>
+  <text x="856" y="636" class="h">Embeddings</text>
+  <text x="856" y="658" class="t">all-MiniLM-L6-v2</text>
+  <text x="856" y="676" class="t">Runs locally</text>
+  <text x="856" y="694" class="t">(transformers.js, ONNX)</text>
+  <text x="856" y="712" class="t">No key, no cost</text>
+  <text x="856" y="784" class="s">or any embeddings API</text>
+
+  <rect x="1035" y="612" width="180" height="186" rx="10" class="data"/>
+  <text x="1051" y="636" class="h">Vector index</text>
+  <text x="1051" y="658" class="t">In memory, exact</text>
+  <text x="1051" y="676" class="t">Cosine similarity</text>
+  <text x="1051" y="694" class="t">Top-k + scores</text>
+  <text x="1051" y="712" class="t">Cached on disk by</text>
+  <text x="1051" y="728" class="t">content fingerprint</text>
+  <text x="1051" y="784" class="mono">.cache/index.json</text>
+
+  <path d="M825 705 H838" class="dataflow" marker-end="url(#gray)"/>
+  <path d="M1020 705 H1033" class="dataflow" marker-end="url(#gray)"/>
+  <!-- search tool -> vector index -->
+  <path d="M996 435 H1022 V596 H1125 V610" class="dataflow" marker-end="url(#gray)"/>
+  <!-- account/refund/status/ticket tools -> CRM -->
+  <path d="M540 580 V610" class="dataflow" marker-end="url(#gray)"/>
+  <text x="548" y="600" class="s">account, refund, status, ticket</text>
+  <text x="1016" y="604" class="s" text-anchor="end">semantic search</text>
+
+  <!-- Evaluation strip -->
+  <rect x="450" y="826" width="765" height="74" rx="10" class="box"/>
+  <text x="466" y="850" class="h">Quality checks</text>
+  <text x="466" y="872" class="t"><tspan class="mono">npm test</tspan>  44 offline checks with a scripted fake LLM</text>
+  <text x="466" y="890" class="t"><tspan class="mono">eval:retrieval</tspan>  hit@1 0.93 vs 0.33 keyword baseline</text>
+  <text x="850" y="872" class="t"><tspan class="mono">eval:agent</tspan>  9 real conversations on the LLM:</text>
+  <text x="850" y="890" class="t">tools, grounding, facts, must-not-happen</text>
+
+  <!-- ===================== External ===================== -->
+  <rect x="1295" y="196" width="255" height="186" rx="10" class="llm"/>
+  <text x="1311" y="220" class="h">LLM provider</text>
+  <text x="1311" y="242" class="t">Any OpenAI-compatible chat</text>
+  <text x="1311" y="258" class="t">completions API with tools</text>
+  <text x="1311" y="282" class="mono">Groq · openai/gpt-oss-120b</text>
+  <text x="1311" y="300" class="mono">or Gemini (free tiers)</text>
+  <text x="1311" y="324" class="s">reasoning_effort low · JSON mode</text>
+  <text x="1311" y="340" class="s">retries 429/5xx within the budget</text>
+  <text x="1311" y="366" class="plabel">3 kinds of call: analyze, loop, verify</text>
+
+  <rect x="1295" y="420" width="255" height="150" rx="10" class="box"/>
+  <text x="1311" y="444" class="h">Configuration (.env)</text>
+  <text x="1311" y="466" class="mono">LLM_BASE_URL · LLM_MODEL</text>
+  <text x="1311" y="484" class="mono">EMBEDDINGS_PROVIDER</text>
+  <text x="1311" y="502" class="mono">SEARCH_*_SCORE 0.25 / 0.40</text>
+  <text x="1311" y="520" class="mono">AGENT_TURN_TIMEOUT_MS</text>
+  <text x="1311" y="538" class="mono">RATE_LIMIT_PER_MINUTE</text>
+  <text x="1311" y="558" class="s">swap providers without code changes</text>
+
+  <rect x="1295" y="612" width="255" height="186" rx="10" class="box"/>
+  <text x="1311" y="636" class="h">API surface</text>
+  <text x="1311" y="660" class="mono">POST /api/agent/chat</text>
+  <text x="1311" y="680" class="mono">GET  /api/agent/sessions/:id</text>
+  <text x="1311" y="700" class="mono">DEL  /api/agent/sessions/:id</text>
+  <text x="1311" y="720" class="mono">GET  /api/kb/search?q=</text>
+  <text x="1311" y="740" class="mono">GET  /api/kb/documents</text>
+  <text x="1311" y="760" class="mono">GET  /api/health</text>
+  <text x="1311" y="784" class="s">browser reaches it via Next /api proxy</text>
+
+  <!-- LLM calls: dashed bus from stages 4, 5, 6 to the provider -->
+  <path d="M590 196 V184 H1260 V270 H1293" class="llmflow" marker-end="url(#purple)"/>
+  <path d="M785 196 V184" class="llmflow"/>
+  <path d="M980 196 V184" class="llmflow"/>
+
+  <!-- ===================== Request / response ===================== -->
+  <!-- 3: request from browser to server -->
+  <path d="M360 330 H405 V152 H448" class="flow" marker-end="url(#teal)"/>
+  <circle cx="405" cy="305" r="10" fill="#0F766E"/><text x="405" y="309" text-anchor="middle" class="num">3</text>
+  <text x="397" y="222" class="label" text-anchor="middle" transform="rotate(-90 397 222)">POST /api/agent/chat</text>
+
+  <!-- 7: response back to the browser -->
+  <path d="M1215 300 H1245 V945 H395 V500 H362" class="flow" marker-end="url(#teal)"/>
+  <text x="820" y="940" class="label" text-anchor="middle">JSON: reply · speech text · sources + scores · agent steps · grounding</text>
+
+  <!-- ===================== Legend ===================== -->
+  <path d="M40 1000 H90" class="flow" marker-end="url(#teal)"/><text x="100" y="1004" class="t">request / response</text>
+  <path d="M260 1000 H310" class="llmflow" marker-end="url(#purple)"/><text x="320" y="1004" class="t">LLM call</text>
+  <path d="M430 1000 H480" class="dataflow" marker-end="url(#gray)"/><text x="490" y="1004" class="t">data access</text>
+  <rect x="610" y="990" width="22" height="18" rx="4" class="guardbox"/><text x="642" y="1004" class="t">safety control enforced in code</text>
+  <rect x="870" y="990" width="22" height="18" rx="4" class="stage"/><text x="902" y="1004" class="t">agent pipeline stage</text>
+  <text x="1570" y="1004" class="s" text-anchor="end">Numbers 1 to 8 follow one voice turn</text>
+</svg>
