@@ -1,0 +1,34 @@
+{
+  "name": "voice-rag-agent-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NestJS API: semantic search over a knowledge base, RAG, and a tool-calling agent",
+  "scripts": {
+    "build": "nest build",
+    "start": "node dist/main.js",
+    "start:dev": "nest start --watch",
+    "eval:retrieval": "ts-node --transpile-only src/scripts/eval-retrieval.ts",
+    "reindex": "node -e \"require('fs').rmSync('.cache/index.json',{force:true})\" && npm run start:dev",
+    "test": "ts-node --transpile-only test/agent.test.ts",
+    "eval:agent": "ts-node --transpile-only src/scripts/eval-agent.ts"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^3.2.0",
+    "@nestjs/common": "^10.4.0",
+    "@nestjs/config": "^3.2.3",
+    "@nestjs/core": "^10.4.0",
+    "@nestjs/platform-express": "^10.4.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^10.4.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18.18"
+  }
+}
