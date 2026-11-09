@@ -72,33 +72,9 @@ Demo accounts (mock CRM): `sara@example.com` (Pro monthly, duplicate charge), `a
 
 ## Architecture
 
-```mermaid
-flowchart LR
-  subgraph Browser [Next.js app]
-    MIC[Mic] --> STT[Web Speech API<br/>speech-to-text]
-    STT --> UI[Transcript, sources,<br/>agent trace]
-    UI --> TTS[speechSynthesis<br/>text-to-speech]
-  end
+![Architecture: browser voice loop, NestJS agent pipeline (analyze, tool loop, verify, output), tools with code-enforced guards, local semantic search, LLM provider](docs/architecture.svg)
 
-  UI -- POST /api/agent/chat --> AG
-
-  subgraph API [NestJS]
-    AG[AgentService] --> AN[1. Analyzer<br/>intent, rewrite, entities]
-    AN --> LOOP[2. Tool loop<br/>LLM function calling, max 6 steps]
-    LOOP --> T1[search_knowledge_base]
-    LOOP --> T2[get_customer_account]
-    LOOP --> T3[calculate_refund]
-    LOOP --> T4[check_service_status]
-    LOOP --> T5[create_support_ticket]
-    T1 --> KB[KbService<br/>in-memory vector index]
-    KB --> EMB[EmbeddingsService<br/>all-MiniLM-L6-v2 local]
-    T2 & T3 & T4 & T5 --> CRM[Mock CRM / billing / status]
-    LOOP --> POST[3. Citations, grounding,<br/>speech text]
-    AG <--> MEM[SessionStore<br/>history + facts]
-  end
-
-  KB -. index built from .-> DOCS[(knowledge-base/*.md)]
-```
+Numbers 1 to 8 follow one voice turn. A PNG version is in `docs/architecture.png`.
 
 ### One turn, step by step
 
